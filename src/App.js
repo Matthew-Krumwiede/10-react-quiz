@@ -46,8 +46,10 @@ function reducer(state, action) {
         ...state,
         status: "finished",
         highScore:
-          state.point > state.highScore ? state.points : state.highScore,
+          state.points > state.highScore ? state.points : state.highScore,
       };
+    case "restart":
+      return { ...state, status: "active", points: 0, index: 0, answer: null };
     default:
       throw new Error("Action not recognized");
   }
@@ -116,6 +118,7 @@ export default function App() {
             points={points}
             maxPoints={maxPoints}
             highScore={highScore}
+            dispatch={dispatch}
           />
         )}
       </Main>
